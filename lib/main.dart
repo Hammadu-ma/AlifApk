@@ -172,24 +172,22 @@ class _WebViewHomeState extends State<WebViewHome> with WidgetsBindingObserver {
       },
       child: Scaffold(
         backgroundColor: kBrandBg,
-        body: SafeArea(
-          child: Stack(
-            children: [
-              if (_isOffline)
-                _OfflineView(onRetry: _reload)
-              else if (_hasError)
-                _ErrorView(onRetry: _reload)
-              else
-                RefreshIndicator(
-                  color: kBrandDark,
-                  backgroundColor: kBrandBg,
-                  onRefresh: _reload,
-                  child: WebViewWidget(controller: _controller),
-                ),
-              if (_isLoading && !_hasError && !_isOffline)
-                _LoadingOverlay(progress: _loadProgress),
-            ],
-          ),
+        body: Stack(
+          children: [
+            if (_isOffline)
+              _OfflineView(onRetry: _reload)
+            else if (_hasError)
+              _ErrorView(onRetry: _reload)
+            else
+              RefreshIndicator(
+                color: kBrandDark,
+                backgroundColor: kBrandBg,
+                onRefresh: _reload,
+                child: WebViewWidget(controller: _controller),
+              ),
+            if (_isLoading && !_hasError && !_isOffline)
+              _LoadingOverlay(progress: _loadProgress),
+          ],
         ),
       ),
     );
